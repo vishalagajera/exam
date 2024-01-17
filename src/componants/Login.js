@@ -84,7 +84,7 @@ const Login = () => {
 			<NavbarBeforeLogin></NavbarBeforeLogin>
 			<FormContainer
 				leftSection={<Lottie animationData={me} loop={true} style={{ height: "100%", width: "100%" }} />}
-				heading={"Sign In"}
+				heading={"Sign In With us"}
 				slogan={"Unlock Your Opportunities.Explore with Login !"}
 				navigat={<p className='--navLink'>No account yet? Time to <Link to={"/signup"}>Sign Up !</Link></p>}
 				textbox1={<InputText
