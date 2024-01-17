@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import FormButton from './FormButton';
 import { Stepper } from 'react-form-stepper';
 import "../Style/login.css"
-const FormContainer = ({ 
+const FormContainer = ({
 	footerSection,
-	handleSubmit, 
+	handleSubmit,
 	setEmail,
 	setPassword,
 	textbox1,
@@ -25,7 +25,8 @@ const FormContainer = ({
 	heading,
 	slogan,
 	navigat,
-	button,
+	button1,
+	button2,
 	leftSection }) => {
 	return (
 		<>
@@ -48,12 +49,15 @@ const FormContainer = ({
 							{textbox4}
 							{textbox5}
 						</div>
-							{textbox6}
-							{textbox7}
-							{textbox8}
-							{textbox9}
-							{textbox10}
-						{button}
+						{textbox6}
+						{textbox7}
+						{textbox8}
+						{textbox9}
+						{textbox10}
+						<div className='--form'>
+							{button1}
+							{button2}
+						</div>
 						<span>{navigat}</span>
 					</div>
 				</div>

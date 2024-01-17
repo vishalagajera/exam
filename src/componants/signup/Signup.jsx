@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import "../../Style/singup.css"
 import NavbarBeforeLogin from '../login/NavbarBeforeLogin'
 import { Link, useNavigate } from 'react-router-dom'
@@ -16,6 +16,7 @@ import InputText from './validateInputs'
 import { useEffect } from 'react'
 const Signup = () => {
     const [screen, setScreen] = useState("step1");
+    console.log(screen);
     const [country, setCountry] = useState("");
     // Step 1
     const [email, setEmail] = useState('');
@@ -36,6 +37,18 @@ const Signup = () => {
     const [workExperience, setWorkExperience] = useState('');
     const [resumeUpload, setResumeUpload] = useState(null);
     const [defaultWarning, setDefaultWarning] = useState("");
+    const handleCountry = (country) => {
+        setCountry(country)
+    }
+    const [state, setState] = useState("");
+    const handleState = (state) => {
+        setState(state)
+    }
+    const [city, setCity] = useState("");
+    const handleCity = (city) => {
+        setCity(city)
+    }
+
     useEffect(() => {
         if (password !== confirmPassword) {
             setDefaultWarning("Passwords mismatch. Please re-enter.")
@@ -70,12 +83,12 @@ const Signup = () => {
             toast.error("Email and Passowrd are  ");
         }
     }
-    const Step1 = useCallback(() => {
+    const step1 = useMemo(() => {
         return <FormContainer
             heading={"Sign Up"}
             leftSection={<Lottie animationData={me} loop={true} style={{ height: "100%", width: "100%" }} />}
             slogan={<Stepper
-                steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: "step 4" }]}
+                steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: "Step 4" }]}
                 activeStep={0}
             />}
             navigat={<p className='--navLink'>Already have an account : <Link to={"/login"}>Login !</Link></p>}
@@ -101,212 +114,208 @@ const Signup = () => {
                     onChange={(e) => setConfirmPassword(e)}
                 />
             }
-            button={
+            button2={
                 <FormButton
                     className={"--btn"}
                     text={"next"}
                     onClick={() => setScreen("step2")}
                 />
             }
-        />
-    }, [password, confirmPassword, email])
-    const step2 = useCallback()
-    const step3 = useCallback()
-    const step4 = useCallback()
 
-    const handleCountry = (country) => {
-        setCountry(country)
-    }
-    const [state, setState] = useState("");
-    const handleState = (state) => {
-        setState(state)
-    }
-    const [city, setCity] = useState("");
-    const handleCity = (city) => {
-        setCity(city)
-    }
+        />
+    }, [password, confirmPassword, email, screen])
+    const step2 = useMemo(() => {
+        return <FormContainer
+            heading={"Sign Up"}
+            leftSection={<Lottie animationData={me} loop={true} style={{ height: "100%", width: "100%" }} />}
+            slogan={<Stepper
+                steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: "step 4" }]}
+                activeStep={1}
+            />}
+            navigat={<p className='--navLink'>Already have an account : <Link to={"/login"}>Login !</Link></p>}
+            textbox1={<InputText
+                inputType={"text"}
+                placeHolder={"First Name"}
+                onChange={(e) => setFirstName(e)}
+            />}
+            textbox2={
+                <InputText
+                    inputType={"text"}
+                    placeHolder={"Last Name"}
+                    onChange={(e) => setLastName(e)}
+                />
+            }
+            button1={<FormButton
+                className={"--btn"}
+                text={"back"}
+                onClick={() => setScreen("step1")}
+            />
+            }
+            button2={
+                <FormButton
+                    className={"--btn"}
+                    text={"next"}
+                    onClick={() => setScreen("step3")}
+                />
+            }
+        />
+    }, [lastName, firstName, screen])
+    const step3 = useMemo(() => {
+        return <FormContainer
+            heading={"Sign Up"}
+            leftSection={<Lottie animationData={me} loop={true} style={{ height: "100%", width: "100%" }} />}
+
+            slogan={<Stepper
+                style={{ color: "#001f3f" }}
+                steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: "step 4" }]}
+                activeStep={2}
+            />}
+            textbox1={<InputText
+                inputType={"text"}
+                onChange={(e) => setPersonalAddress(e)}
+                placeHolder={"Personal Address"}
+            />}
+            textbox2={<FormSelectBox
+                type="text"
+                className="--input"
+                onchange=""
+                warning="country"
+                placeholder="Street Address"
+                arrayKey="country"
+                country={handleCountry}
+                selectedCountry={country}
+                selectedState={state}
+                state={handleState}
+                selectedCity={city}
+                city={handleCity}
+            />}
+            textbox3={<FormSelectBox
+                type="text"
+                warning="states"
+                className="--input"
+                arrayKey="states"
+                selectedCountry={country}
+                country={handleCountry}
+                selectedState={state}
+                state={handleState}
+                selectedCity={city}
+                city={handleCity}
+            />}
+            textbox4={<FormSelectBox
+                type="text"
+                className="--input"
+                arrayKey="cities"
+                warning="city"
+                selectedCountry={country}
+                country={handleCountry}
+                selectedState={state}
+                state={handleState}
+                selectedCity={city}
+                city={handleCity}
+            />}
+            textbox6={<InputText
+                onChange={(e) => setPinCode(e)}
+                inputType={"text"}
+                placeHolder={"PinCode"}
+            />}
+            button1={
+                <FormButton
+                    className={"--btn"}
+                    text={"back"}
+                    onClick={() => setScreen("step2")}
+                />
+            }
+            button2={
+                <FormButton
+                    className={"--btn"}
+                    text={"next"}
+                    onClick={() => setScreen("step4")}
+                />
+            }
+        />
+    }, [personalAddress, country, state, city, pinCode])
+    const step4 = useMemo(() => {
+        return <FormContainer
+            heading={"Sign Up"}
+            leftSection={<Lottie animationData={me} loop={true} style={{ height: "100%", width: "100%" }} />}
+
+            slogan={<Stepper
+                style={{ color: "#001f3f" }}
+                steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: "step 4" }]}
+                activeStep={3}
+            />}
+            textbox1={<InputText
+                id="School"
+                inputType={"text"}
+                placeHolder="Name of the educational institution."
+                require={true}
+            />}
+            textbox2={<InputText
+                id="degree_level"
+                inputType={"text"}
+                placeHolder="Type of degree obtained."
+                require={true}
+            />}
+            textbox4={<InputText
+                inputType={"date"}
+                label={"Start Date"}
+                require={true}
+            />}
+            textbox5={<InputText
+                inputType={"date"}
+                label={"End Date"}
+            />}
+            textbox6={<InputText
+                id="gpa"
+                inputType={"text"}
+                placeHolder="Enter GPA"
+                require={false}
+            />}
+            textbox7={<InputText
+                id="certifications"
+                inputType={"text"}
+                placeHolder="Activities and Societies"
+                require={false}
+            />}
+            textbox8={<InputText
+                id="online_courses"
+                inputType={"text"}
+                placeHolder="Description"
+                require={false}
+            />}
+            button1={
+                <FormButton
+                    className={"--btn"}
+                    text={"back"}
+                    onClick={() => setScreen("step3")}
+                />
+            }
+            button2={
+                <FormButton
+                    className={"--btn"}
+                    text={"Get Started"}
+                    onClick={() => setScreen("step1")}
+                />
+            }
+        />
+    }, [])
+
+
     const renderform = useMemo(() => {
         switch (screen) {
             case "step1":
-                return <Step1 />
+                return step1
             case "step2":
-                return <FormContainer
-                    heading={"Sign Up"}
-                    leftSection={<Lottie animationData={me} loop={true} style={{ height: "100%", width: "100%" }} />}
-                    slogan={<Stepper
-                        steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: "step 4" }]}
-                        activeStep={1}
-                    />}
-                    navigat={<p className='--navLink'>Already have an account : <Link to={"/login"}>Login !</Link></p>}
-                    textbox1={<InputText
-                        inputType={"text"}
-                        placeHolder={"First Name"}
-                        onChange={(e) => setFirstName(e)}
-                    />}
-                    textbox2={
-                        <InputText
-                            inputType={"text"}
-                            placeHolder={"Last Name"}
-                            onChange={(e) => setLastName(e)}
-                        />
-                    }
-                    button={
-                        <FormButton
-                            className={"--btn"}
-                            text={"next"}
-                            onClick={() => setScreen("step3")}
-                        />
-                    }
-                />
+                return step2
             case "step3":
-                return <FormContainer
-                    heading={"Sign Up"}
-                    leftSection={<Lottie animationData={me} loop={true} style={{ height: "100%", width: "100%" }} />}
-
-                    slogan={<Stepper
-                        style={{ color: "#001f3f" }}
-                        steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: "step 4" }]}
-                        activeStep={2}
-                    />}
-                    textbox1={<InputText
-                        inputType={"text"}
-                        onChange={(e) => setPersonalAddress(e)}
-                        placeHolder={"Personal Address"}
-                    />}
-                    textbox2={<FormSelectBox
-                        type="text"
-                        className="--input"
-                        onchange=""
-                        warning="country"
-                        placeholder="Street Address"
-                        arrayKey="country"
-                        country={handleCountry}
-                        selectedCountry={country}
-                        selectedState={state}
-                        state={handleState}
-                        selectedCity={city}
-                        city={handleCity}
-                    />}
-                    textbox3={<FormSelectBox
-                        type="text"
-                        warning="states"
-                        className="--input"
-                        arrayKey="states"
-                        selectedCountry={country}
-                        country={handleCountry}
-                        selectedState={state}
-                        state={handleState}
-                        selectedCity={city}
-                        city={handleCity}
-                    />}
-                    textbox4={<FormSelectBox
-                        type="text"
-                        className="--input"
-                        arrayKey="cities"
-                        warning="city"
-                        selectedCountry={country}
-                        country={handleCountry}
-                        selectedState={state}
-                        state={handleState}
-                        selectedCity={city}
-                        city={handleCity}
-                    />}
-                    textbox5={<InputText
-                        onChange={(e) => setPinCode(e)}
-                        inputType={"text"}
-                        placeHolder={"PinCode"}
-                    />}
-                    button={
-                        < FormButton
-                            className={"--btn"}
-                            text={"next"}
-                            onClick={() => setScreen("step4")}
-                        />
-                    }
-                />
+                return step3
             case "step4":
-                return <FormContainer
-                    heading={"Sign Up"}
-                    leftSection={<Lottie animationData={me} loop={true} style={{ height: "100%", width: "100%" }} />}
-
-                    slogan={<Stepper
-                        style={{ color: "#001f3f" }}
-                        steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: "step 4" }]}
-                        activeStep={3}
-                    />}
-                    textbox1={<InputText
-                        id="institution_name"
-                        inputType="text"
-                        placeHolder="Enter institution name"
-                        require={true}
-                    />}
-                    textbox2={<InputText
-                        id="degree_level"
-                        inputType="text"
-                        placeHolder="Enter degree level"
-                        require={true}
-                    />}
-                    textbox3={<InputText
-                        id="field_of_study"
-                        inputType="text"
-                        placeHolder="Enter field of study"
-                        require={true}
-                    />}
-                    textbox4={<InputText
-                        id="graduation_year"
-                        inputType="number"
-                        placeHolder="Enter graduation year"
-                        require={true}
-                    />}
-                    textbox5={<InputText
-                        id="degree_earned"
-                        inputType="text"
-                        placeHolder="Enter degree earned"
-                        require={true}
-                    />}
-                    textbox6={<InputText
-                        id="gpa"
-                        inputType="number"
-                        placeHolder="Enter GPA"
-                        require={false}
-                    />}
-                    textbox7={<InputText
-                        id="certifications"
-                        inputType="text"
-                        placeHolder="Enter certifications (comma-separated)"
-                        require={false}
-                    />}
-                    textbox8={<InputText
-                        id="online_courses"
-                        inputType="text"
-                        placeHolder="Enter online courses (comma-separated)"
-                        require={false}
-                    />}
-                    textbox9={<InputText
-                        id="project_details"
-                        inputType="text"
-                        placeHolder="Enter project details"
-                        require={false}
-                    />}
-                    textbox10={<InputText
-                        id="language_proficiency"
-                        inputType="text"
-                        placeHolder="Enter language proficiency (comma-separated)"
-                        require={false}
-                    />}
-                    button={
-                        < FormButton
-                            className={"--btn"}
-                            text={"Get Started"}
-                            onClick={() => setScreen("step1")}
-                        />
-                    }
-                />
+                return step4
             default:
                 return <h1>not found</h1>
         }
     }, [screen, country, state, city])
-    // Check()
+
     const navigate = useNavigate();
     if (Cookies.get("token")) {
         navigate("/home");

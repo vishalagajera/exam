@@ -100,7 +100,7 @@ const Login = () => {
 						onChange={(e) =>setPassword(e)}
 					/>
 				}
-				button={
+				button1={
 					<FormButton
 						className={"--btn"}
 						text={"Login"}
