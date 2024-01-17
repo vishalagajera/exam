@@ -1,0 +1,107 @@
+.--main{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    padding: 100px ;
+    justify-content: center;
+    align-items: center;
+    flex-flow:wrap;
+}
+
+.--left{
+    max-width: 550px;
+    width: 100vh;
+    height: 550px;
+}
+
+.--right{
+    max-width: 550px;
+    width: 100vh;
+    height: 550px;
+    padding:50px;
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 20px rgba(77, 76, 76, 0.234);
+    border-radius: 10px;
+}
+
+.--heading{
+    display: flex;
+    flex-direction: column;
+}
+.--headingText{
+    font-size: 2rem;
+    color: black;
+}
+.--sloganText{
+    font-size: 1rem;
+
+}
+.Forms{
+    margin-top: 30px;
+    width: 100%;
+    max-height: 300px;
+    display: flex;
+    overflow: scroll;
+    justify-content: left;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.--input{
+    width: 100%;
+    border-radius: 10px;    
+    padding: 15px;
+    background: transparent;
+    outline: none;
+    border:  2px solid rgba(0, 0, 0, 0.48);
+}
+.--input:focus{
+    border: 2px solid rgb(0, 0, 255);
+}
+::placeholder{
+    font-size: 1.2rem;
+}
+.--btn{
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid rgb(90, 167, 255);
+    background-color: white;
+    font-size: 1.2rem;
+}
+.--btn:hover{
+    background-color: rgba(0, 98, 255, 0.824);
+    color: white;
+}
+.form--footer{
+    width: 100%;
+}
+.--navLink{
+    margin: 0;
+}
+.--form{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+.--allinput{
+    width: 100%;
+}
+@media only screen and  (max-width : 768px) {
+    .--main{
+        padding: 20px;
+    }
+    .--sloganText{
+        font-size: small;    
+    }
+    .--right{
+        padding: 30px;
+        
+    }
+}
+
+@media only screen and  (max-width : 768px) {
+    .--left{
+        display: none;
+    }
+}
