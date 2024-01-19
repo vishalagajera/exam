@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom'
 import InputText from './signup/validateInputs';
 import me from "../assets/me.json"
 import Check from '../Auth/check'
-import FormTextboxes from './FormTextbox';
 import FormButton from './FormButton';
 const Login = () => {
 
@@ -108,7 +107,6 @@ const Login = () => {
 					/>
 				}
 			/>
-			<Footer></Footer>
 		</>
 	)
 }

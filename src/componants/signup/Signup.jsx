@@ -458,7 +458,7 @@ const Signup = () => {
       <FormContainer
         heading={"Sign Up"}
         leftSection={lottie}
-        title={"Work Experience"}
+        title={"Unleash your potential and let your unique abilities shine on the path to career success."}
         slogan={
           <Stepper
             style={{ color: "#001f3f" }}
@@ -476,14 +476,7 @@ const Signup = () => {
         textbox2={
           <InputText
             inputType={"text"}
-            placeHolder={"Enter your Skills"}
-            require={true}
-          />
-        }
-        textbox4={
-          <InputText
-            inputType={"text"}
-            placeHolder={"Enter your Skills"}
+            placeHolder={"Enter your Skills(skill1,skill2)"}
             require={true}
           />
         }
