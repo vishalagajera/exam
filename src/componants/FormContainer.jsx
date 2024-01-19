@@ -12,6 +12,7 @@ const FormContainer = ({
 	handleSubmit,
 	setEmail,
 	setPassword,
+	title,
 	textbox1,
 	textbox2,
 	textbox3,
@@ -38,6 +39,7 @@ const FormContainer = ({
 					<div className='--heading'>
 						<span className='--headingText'>{heading}</span>
 						<span className='--sloganText'>{slogan}</span>
+						<span className='--titleText'>{title}</span>
 					</div>
 					<div className='Forms'>
 						{textbox1}

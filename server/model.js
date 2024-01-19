@@ -13,6 +13,37 @@ const educationSchema = new mongoose.Schema({
 	language_proficiency: [String],  // Array to store multiple languages, optional
 })
 const Education = mongoose.model('Education', educationSchema);
+const workExperienceSchema = new mongoose.Schema({
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	},
+	jobTitle: {
+		type: String,
+		required: true
+	},
+	companyName: {
+		type: String,
+		required: true
+	},
+	startDate: {
+		type: Date,
+		required: true
+	},
+	endDate: {
+		type: Date
+	},
+	responsibilities: {
+		type: String
+	},
+	achievements: {
+		type: String
+	}
+});
+
+const WorkExperience = mongoose.model('WorkExperience', workExperienceSchema);
+
 
 const newSchema = new mongoose.Schema({
 	email: {
@@ -40,7 +71,8 @@ const newSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
-	education: [educationSchema]
+	education: [educationSchema],
+	workExperience: [workExperienceSchema]
 });
 const data = mongoose.model("users", newSchema);
 module.exports = data

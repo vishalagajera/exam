@@ -1,42 +1,45 @@
-.--main{
+.--main {
     width: 100%;
     min-height: 100vh;
     display: flex;
-    padding: 100px ;
+    padding: 100px;
     justify-content: center;
     align-items: center;
-    flex-flow:wrap;
+    flex-flow: wrap;
 }
 
-.--left{
+.--left {
     max-width: 550px;
     width: 100vh;
     height: 550px;
 }
 
-.--right{
+.--right {
     max-width: 550px;
     width: 100vh;
     height: 550px;
-    padding:50px;
+    padding: 50px;
     backdrop-filter: blur(30px);
     box-shadow: 0 0 20px rgba(77, 76, 76, 0.234);
     border-radius: 10px;
 }
 
-.--heading{
+.--heading {
     display: flex;
     flex-direction: column;
 }
-.--headingText{
+
+.--headingText {
     font-size: 2rem;
     color: black;
 }
-.--sloganText{
+
+.--sloganText {
     font-size: 1rem;
 
 }
-.Forms{
+
+.Forms {
     margin-top: 30px;
     width: 100%;
     max-height: 300px;
@@ -47,21 +50,25 @@
     flex-direction: column;
     gap: 20px;
 }
-.--input{
+
+.--input {
     width: 100%;
-    border-radius: 10px;    
+    border-radius: 10px;
     padding: 15px;
     background: transparent;
     outline: none;
-    border:  2px solid rgba(0, 0, 0, 0.48);
+    border: 2px solid rgba(0, 0, 0, 0.48);
 }
-.--input:focus{
+
+.--input:focus {
     border: 2px solid rgb(0, 0, 255);
 }
-::placeholder{
+
+::placeholder {
     font-size: 1.2rem;
 }
-.--btn{
+
+.--btn {
     width: 100%;
     padding: 13px;
     border-radius: 10px;
@@ -69,39 +76,54 @@
     background-color: white;
     font-size: 1.2rem;
 }
-.--btn:hover{
+
+.--btn:hover {
     background-color: rgba(0, 98, 255, 0.824);
     color: white;
 }
-.form--footer{
+
+.form--footer {
     width: 100%;
 }
-.--navLink{
+
+.--navLink {
     margin: 0;
 }
-.--form{
+
+.--form {
     display: flex;
     width: 100%;
     gap: 10px;
 }
-.--allinput{
+
+.--allinput {
     width: 100%;
 }
-@media only screen and  (max-width : 768px) {
-    .--main{
+
+@media only screen and (max-width : 768px) {
+    .--main {
         padding: 20px;
     }
-    .--sloganText{
-        font-size: small;    
+
+    .--sloganText {
+        font-size: small;
     }
-    .--right{
+
+    .--right {
         padding: 30px;
-        
+
     }
 }
 
-@media only screen and  (max-width : 768px) {
-    .--left{
+@media only screen and (max-width : 768px) {
+    .--left {
         display: none;
     }
+}
+
+.--titleText {
+    font-size: 0.8em;
+    text-align: justify;
+    color: #2C73D2;
+    width: 100%;
 }
