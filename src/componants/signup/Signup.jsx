@@ -125,7 +125,7 @@ const Signup = () => {
         }
         textbox2={
           <InputText
-            inputType={"password"}
+            inputType={"text"}
             password={true}
             placeHolder={"Password"}
             onChange={(e) => setPassword(e)}
