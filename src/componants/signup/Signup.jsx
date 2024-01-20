@@ -30,25 +30,36 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   // Step 2
-  const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   // Step 3
   const [personalAddress, setPersonalAddress] = useState("");
   const [pinCode, setPinCode] = useState("");
   // Step 4 (optional)
-  const [skills, setSkills] = useState("");
-  const [education, setEducation] = useState("");
-  const [workExperience, setWorkExperience] = useState("");
-  const [resumeUpload, setResumeUpload] = useState(null);
   const [defaultWarning, setDefaultWarning] = useState("");
+  const [institutionName, setInstitutionName] = useState("");
+  const [degreeLevel, setDegreeLevel] = useState("");
+  const [startDateSchool, setStartDateSchool] = useState("");
+  const [endDateSchool, setEndDateSchool] = useState("");
+  const [gpa, setGpa] = useState("");
+  const [certifications, setCertifications] = useState("");
+  const [onlineCourses, setDis_OfOnlineCourses] = useState("");
+
+  // Step 5 - Work Experience
+  const [jobTitle, setJobTitle] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [startDateWork, setStartDateWork] = useState("");
+  const [endDateWork, setEndDateWork] = useState("");
+  const [responsibilities, setResponsibilities] = useState("");
+  const [achievements, setAchievements] = useState("");
+  // Step 6 - Skills and Profession
+  const [skills, setSkills] = useState("");
   const [profession, setProfession] = useState("");
-  
+  const [langauges, setLanguages] = useState("");
   const [state, setState] = useState("");
   const handleState = (state) => {
     setState(state);
   };
-
   const [city, setCity] = useState("");
   const handleCity = (city) => {
     setCity(city);
@@ -108,7 +119,6 @@ const Signup = () => {
         }
         textbox1={
           <InputText
-            key={Math.random()}
             inputType={"email "}
             placeHolder={"Email"}
             onChange={(e) => setEmail(e)}
@@ -116,7 +126,6 @@ const Signup = () => {
         }
         textbox2={
           <InputText
-            key={Math.random()}
             inputType={"password"}
             password={true}
             placeHolder={"Password"}
@@ -126,7 +135,6 @@ const Signup = () => {
         }
         textbox3={
           <InputText
-            key={Math.random()}
             inputType={"password"}
             password={true}
             placeHolder={"Confirm Password"}
@@ -137,7 +145,9 @@ const Signup = () => {
           <FormButton
             className={"--btn"}
             text={"next"}
-            onClick={() => setScreen("step2")}
+            onClick={() => {
+              setScreen("step2");
+            }}
           />
         }
       />
@@ -160,7 +170,6 @@ const Signup = () => {
         }
         textbox1={
           <InputText
-            key={Math.random()}
             inputType={"text"}
             placeHolder={"First Name"}
             onChange={(e) => setFirstName(e)}
@@ -168,7 +177,6 @@ const Signup = () => {
         }
         textbox2={
           <InputText
-            key={Math.random()}
             inputType={"text"}
             placeHolder={"Last Name"}
             onChange={(e) => setLastName(e)}
@@ -185,7 +193,9 @@ const Signup = () => {
           <FormButton
             className={"--btn"}
             text={"next"}
-            onClick={() => setScreen("step3")}
+            onClick={() => {
+              setScreen("step3");
+            }}
           />
         }
       />
@@ -209,7 +219,6 @@ const Signup = () => {
         }
         textbox1={
           <InputText
-            key={Math.random()}
             inputType={"text"}
             onChange={(e) => setPersonalAddress(e)}
             placeHolder={"Personal Address"}
@@ -221,7 +230,6 @@ const Signup = () => {
             // warning="states"
             className="--input"
             arrayKey="states"
-            key={Math.random()}
             selectedState={state}
             state={handleState}
             selectedCity={city}
@@ -232,7 +240,6 @@ const Signup = () => {
           <FormSelectBox
             className={"--input"}
             arrayKey="cities"
-            key={Math.random()}
             // warning="city"
             selectedState={state}
             state={handleState}
@@ -242,7 +249,7 @@ const Signup = () => {
         }
         textbox4={
           <InputText
-            key={Math.random()} 
+            key={Math.random()}
             id={"Pincode"}
             onChange={(e) => setPinCode(e)}
             inputType={"text"}
@@ -262,12 +269,14 @@ const Signup = () => {
           <FormButton
             className={"--btn"}
             text={"next"}
-            onClick={() => setScreen("step4")}
+            onClick={() => {
+              setScreen("step4");
+            }}
           />
         }
       />
     );
-  }, [state , city , screen ]);
+  }, [state, city, screen]);
 
   const step4 = useMemo(() => {
     return (
@@ -286,7 +295,7 @@ const Signup = () => {
         }
         textbox1={
           <InputText
-            key={Math.random()}
+            onChange={(e) => setInstitutionName(e)}
             id={"School"}
             inputType={"text"}
             placeHolder="Name of the educational institution."
@@ -295,7 +304,7 @@ const Signup = () => {
         }
         textbox2={
           <InputText
-            key={Math.random()}
+            onChange={(e) => setDegreeLevel(e)}
             id={"degree_level"}
             inputType={"text"}
             placeHolder="Type of degree obtained."
@@ -304,8 +313,8 @@ const Signup = () => {
         }
         textbox4={
           <InputText
-            key={Math.random()}
             inputType={"date"}
+            onChange={(e) => setStartDateSchool(e)}
             label={"Start Date"}
             id={"start date"}
             placeHolder="start date"
@@ -313,7 +322,7 @@ const Signup = () => {
         }
         textbox5={
           <InputText
-            key={Math.random()}
+            onChange={(e) => setEndDateSchool(e)}
             id={"enddate"}
             inputType={"date"}
             label={"End Date"}
@@ -321,17 +330,17 @@ const Signup = () => {
         }
         textbox6={
           <InputText
-            key={Math.random()}
             id={"gpa"}
             inputType={"text"}
+            onChange={(e) => setGpa(e)}
             placeHolder={"Enter GPA"}
             require={false}
           />
         }
         textbox7={
           <InputText
-            key={Math.random()}
             id={"certifications"}
+            onChange={(e) => setCertifications(e)}
             inputType={"text"}
             placeHolder={"Activities and Societies"}
             require={false}
@@ -339,8 +348,8 @@ const Signup = () => {
         }
         textbox8={
           <InputText
-            key={Math.random()}
             id={"online_courses"}
+            onChange={(e) => setDis_OfOnlineCourses(e)}
             inputType={"text"}
             placeHolder={"Description"}
             require={false}
@@ -357,7 +366,8 @@ const Signup = () => {
           <FormButton
             className={"--btn"}
             text={"Next"}
-            onClick={() => setScreen("step5")}
+            onClick={() => {
+              setScreen("step5")}}
           />
         }
       />
@@ -381,7 +391,7 @@ const Signup = () => {
         }
         textbox1={
           <InputText
-            key={Math.random()}
+            onChange={(e) => setJobTitle(e)}
             id="JobTitle"
             inputType={"text"}
             placeHolder={"Job Title"}
@@ -390,8 +400,8 @@ const Signup = () => {
         }
         textbox2={
           <InputText
-            key={Math.random()}
             id="CompanyName"
+            onChange={(e) => setCompanyName}
             inputType={"text"}
             placeHolder={"Company Name"}
             require={true}
@@ -399,7 +409,7 @@ const Signup = () => {
         }
         textbox4={
           <InputText
-            key={Math.random()}
+            onChange={(e) => setStartDateWork(e)}
             id="StartDate"
             inputType={"date"}
             placeHolder="Start Date"
@@ -409,8 +419,8 @@ const Signup = () => {
         }
         textbox5={
           <InputText
-            key={Math.random()}
             id="EndDate"
+            onChange={(e) => setEndDateWork(e)}
             inputType={"date"}
             placeHolder="End Date"
             require={true}
@@ -419,19 +429,19 @@ const Signup = () => {
         }
         textbox7={
           <InputText
-            key={Math.random()}
             id="Responsibilities"
             inputType={"text"}
+            onChange={(e) => setResponsibilities(e)}
             placeHolder="Responsibilities"
             require={false}
           />
         }
         textbox8={
           <InputText
-            key={Math.random()}
             id="Achievements"
             inputType={"text"}
             placeHolder={"Achievements"}
+            onChange={(e) => setAchievements(e)}
             require={false}
           />
         }
@@ -446,7 +456,8 @@ const Signup = () => {
           <FormButton
             className={"--btn"}
             text={"Next"}
-            onClick={() => setScreen("step6")}
+            onClick={() => {
+              setScreen("step6")}}
           />
         }
       />
@@ -458,7 +469,9 @@ const Signup = () => {
       <FormContainer
         heading={"Sign Up"}
         leftSection={lottie}
-        title={"Unleash your potential and let your unique abilities shine on the path to career success."}
+        title={
+          "Unleash your potential and let your unique abilities shine on the path to career success."
+        }
         slogan={
           <Stepper
             style={{ color: "#001f3f" }}
@@ -470,14 +483,22 @@ const Signup = () => {
           <ProfessionBox
             onChange={(e) => setProfession(e.target.value)}
             arrayKey="profession"
-            key={Math.random()}
+            multiple={false}
+          />
+        }
+        textbox3={
+          <InputText
+          inputType={"text"}
+            onChange={(e) => setLanguages(e)}
+            placeHolder={"Langauges(lang1,lang2,...)"}
+ 
           />
         }
         textbox2={
           <InputText
             inputType={"text"}
-            placeHolder={"Enter your Skills(skill1,skill2)"}
-            require={true}
+            onChange={(e) => setSkills(e)}
+            placeHolder={"Enter your Skills(skill1,skill2,...)"}
           />
         }
         button1={
@@ -491,7 +512,8 @@ const Signup = () => {
           <FormButton
             className={"--btn"}
             text={"Get Started"}
-            onClick={() => setScreen("step1")}
+            onClick={() =>{
+              setScreen("step1")}}
           />
         }
       />

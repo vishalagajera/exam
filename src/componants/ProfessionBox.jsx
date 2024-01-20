@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 
-const ProfessionBox = ({ onChange, value, arrayKey }) => {
+const ProfessionBox = ({ onChange, value, arrayKey ,multiple}) => {
   const professions = [
     "Select Your Profession",
     "Software Developer",
@@ -68,6 +68,7 @@ const ProfessionBox = ({ onChange, value, arrayKey }) => {
       value={value}
       className="--input"
       onChange={onChange}
+      multiple={multiple}
     >
       {renderOptions}
     </select>
