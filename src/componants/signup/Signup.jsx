@@ -64,20 +64,6 @@ const Signup = () => {
   const handleCity = (city) => {
     setCity(city);
   };
-  useEffect(() => {
-    if (password !== confirmPassword) {
-      setDefaultWarning("Passwords mismatch. Please re-enter.");
-    }
-    if (
-      password === confirmPassword &&
-      password.length >= 8 &&
-      confirmPassword.length >= 8
-    ) {
-      setDefaultWarning("Good to go...");
-    } else {
-      setDefaultWarning("password is required");
-    }
-  }, [password, confirmPassword]);
 
   const handleSubmit = async () => {
     if (email !== "" && password !== "") {
@@ -101,7 +87,28 @@ const Signup = () => {
       toast.error("Email and Passowrd are  ");
     }
   };
-
+  const isValidate = useMemo(() => {
+    if (
+      email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        ) &&
+        password.length >= 8 &&
+        confirmPassword.length >= 8 &&
+        password === confirmPassword &&
+        password.length !=0 &&
+        confirmPassword.length != 0 
+        ) {
+          return false;
+        } else {
+          return true;
+        }
+      }, [email, password, confirmPassword]);
+      useEffect(()=>{
+        if (!isValidate) {
+          toast.success("Good To Go...")
+        }
+      } , [isValidate])
+      
   const step1 = useMemo(() => {
     return (
       <FormContainer
@@ -119,7 +126,7 @@ const Signup = () => {
         textbox1={
           <InputText
             inputType={"email "}
-            placeHolder={"Email"}
+            placeHolder={"Email*"}
             onChange={(e) => setEmail(e)}
           />
         }
@@ -127,23 +134,23 @@ const Signup = () => {
           <InputText
             inputType={"text"}
             password={true}
-            placeHolder={"Password"}
+            placeHolder={"Password*"}
             onChange={(e) => setPassword(e)}
-            warning={"Password is required. Please enter a password"}
           />
         }
         textbox3={
           <InputText
             inputType={"password"}
             password={true}
-            placeHolder={"Confirm Password"}
+            placeHolder={"Confirm Password*"}
             onChange={(e) => setConfirmPassword(e)}
           />
         }
         button2={
           <FormButton
-            className={"--btn"}
+            className={isValidate ? "--btnDisabled" : "--btn"}
             text={"next"}
+            isDisabled={isValidate}
             onClick={() => {
               setScreen("step2");
             }}
@@ -366,7 +373,8 @@ const Signup = () => {
             className={"--btn"}
             text={"Next"}
             onClick={() => {
-              setScreen("step5")}}
+              setScreen("step5");
+            }}
           />
         }
       />
@@ -456,7 +464,8 @@ const Signup = () => {
             className={"--btn"}
             text={"Next"}
             onClick={() => {
-              setScreen("step6")}}
+              setScreen("step6");
+            }}
           />
         }
       />
@@ -487,10 +496,9 @@ const Signup = () => {
         }
         textbox3={
           <InputText
-          inputType={"text"}
+            inputType={"text"}
             onChange={(e) => setLanguages(e)}
             placeHolder={"Langauges(lang1,lang2,...)"}
- 
           />
         }
         textbox2={
@@ -511,8 +519,9 @@ const Signup = () => {
           <FormButton
             className={"--btn"}
             text={"Get Started"}
-            onClick={() =>{
-              setScreen("step1")}}
+            onClick={() => {
+              setScreen("step1");
+            }}
           />
         }
       />
