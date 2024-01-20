@@ -1,6 +1,6 @@
 import React from 'react'
 import Lottie from "lottie-react";
-
+import { ToastContainer } from 'react-toastify';
 import me from "../assets/me.json"
 import FormTextboxes from './FormTextbox';
 import { Link } from 'react-router-dom';
@@ -31,6 +31,7 @@ const FormContainer = ({
 	leftSection }) => {
 	return (
 		<>
+			<ToastContainer />
 			<div className='--main'>
 				<div className='--left'>
 					{leftSection}
