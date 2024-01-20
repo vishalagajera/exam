@@ -88,7 +88,6 @@ const Signup = () => {
           "Content-Type": "application/json",
         },
       }).then((e) => e.json());
-      console.log(result);
       if (result.success) {
         toast.success("Your journey is just a few moments away! ", {
           isLoading: true,
