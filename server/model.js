@@ -1,81 +1,78 @@
 const mongoose = require("mongoose");
 
 const educationSchema = new mongoose.Schema({
-	institution_name: String,
-	degree_level: String,
-	field_of_study: String,
-	degree_earned: String,
-	graduation_year: Number,
-	gpa: Number,  // optional
-	certifications: [String],  // Array to store multiple certifications
-	online_courses: [String],  // Array to store multiple online courses
-	project_details: String,  // optional
-	language_proficiency: [String],  // Array to store multiple languages, optional
-})
-const Education = mongoose.model('Education', educationSchema);
+  institutionName: { type: String, required: false },
+  degreeLevel: { type: String, required: false },
+  startDateSchool: { type: Date, required: false },
+  endDateSchool: { type: Date, required: false },
+  gpa: { type: Number, required: false },
+  certifications: [{ type: String, required: false }],
+  onlineCourses: [{ type: String, required: false }],
+});
 const workExperienceSchema = new mongoose.Schema({
-	user: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User',
-		required: true
-	},
-	jobTitle: {
-		type: String,
-		required: true
-	},
-	companyName: {
-		type: String,
-		required: true
-	},
-	startDate: {
-		type: Date,
-		required: true
-	},
-	endDate: {
-		type: Date
-	},
-	responsibilities: {
-		type: String
-	},
-	achievements: {
-		type: String
-	}
+  fresher: { type: Boolean, required: false },
+  jobTitle: {
+    type: String,
+    required: function () {
+      return !this.fresher;
+    },
+  },
+  companyName: {
+    type: String,
+    required: function () {
+      return !this.fresher;
+    },
+  },
+  startDateWork: {
+    type: Date,
+    required: function () {
+      return !this.fresher;
+    },
+  },
+  endDateWork: {
+    type: Date,
+    required: function () {
+      return !this.fresher;
+    },
+  },
+  responsibilities: {
+    type: String,
+    required: function () {
+      return !this.fresher;
+    },
+  },
+  achievements: [{ type: String, required: false }],
 });
 
-const WorkExperience = mongoose.model('WorkExperience', workExperienceSchema);
+const addressSchema = mongoose.Schema({
+  personalAddress: { type: String, required: true },
+  pinCode: { type: String, required: true },
+  state: { type: String, required: true },
+  city: { type: String, required: true },
+});
 
 
 const newSchema = new mongoose.Schema({
-	email: {
-		type: String,
-		required: true,
-		unique: true,
-	},
-	password: {
-		type: String,
-		required: true,
-	},
-	firstName: {
-		type: String,
-	},
-	lastName: {
-		type: String,
-	},
-	birthdate: {
-		type: Date,
-	},
-	profileImage: {
-		type: String,
-	},
-	registrationDate: {
-		type: Date,
-		default: Date.now,
-	},
-	education: [educationSchema],
-	workExperience: [workExperienceSchema]
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  location : {addressSchema},
+  profileImage: {
+    type: String,
+  },
+  registrationDate: {
+    type: Date,
+    default: Date.now,
+  },
+  langauges: {
+    type: [String],
+  },
+  profession: {
+    type: String,
+  },
+  education: {educationSchema},
+  workExperience : {workExperienceSchema},
 });
 const data = mongoose.model("users", newSchema);
-module.exports = data
-
-
-
+module.exports = data;
