@@ -20,25 +20,12 @@
     padding-right: 50px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media only screen and (max-width : 768px) {
     .img--logo{
-        width: 25vh;
+        width: 20vh;
         padding-left: 0px;
     }
     .login--slogan{
-        display: none;
+        padding-right: 20px ;
     }
 }

@@ -1,0 +1,132 @@
+.bodyTermPage {
+    font-family: 'Arial', sans-serif;
+    padding: 25px;
+    height: 100%;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100% - 25px);
+}
+
+.containerTermPage {
+    overflow: scroll;
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 60vh;
+}
+
+.h1TermPage {
+    color: #333;
+    text-align: center;
+}
+
+.pTermPage {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.footerTermPage {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    background-color: #4285f4;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    padding: 10px 0;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+@media (max-width: 600px) {
+    .containerTermPage {
+        padding: 10px;
+    }
+}
+.FooterImage{
+    max-width: 150px;
+}
+.footerTagline{
+    font-size: 1.2em;
+}
+
+.down-footer {
+    width: 100%;
+    color: #404040;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.--waring{
+    color: red;
+}
+.footer-li {
+    display: flex;
+    list-style: none;
+}
+
+.footer-li li {
+    padding: 0 1rem;
+}
+
+.footer-li li a {
+    color: #404040;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 821px) {
+    .up-left {
+        width: 100%;
+    }
+
+    .upper-footer,
+    .down-footer,
+    .up-left {
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .image {
+        margin: 2rem 0;
+    }
+
+    .content {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .footer-heading {
+        margin: 1rem 0;
+        text-align: center;
+    }
+
+    .down-footer {
+        flex-direction: column-reverse;
+    }
+
+    .down-footer .leftPara {
+        margin-top: 1rem;
+    }
+
+    .footer-li {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        line-height: 25px;
+        margin: 1rem auto;
+    }
+}   

@@ -3,6 +3,13 @@ import "../../Style/singup.css";
 import NavbarBeforeLogin from "../login/NavbarBeforeLogin";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+
+import {
+  isValidStep1,
+  isValidStep2,
+  isValidStep3,
+  isValidStep4
+} from "../../Auth/isValidate";
 import ProfessionBox from "../ProfessionBox";
 import Lottie from "lottie-react";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,7 +21,6 @@ import me from "../../assets/Je3eTqQJrt.json";
 import FormContainer from "../FormContainer";
 import "../../Style/login.css";
 import InputText from "./validateInputs";
-import { useEffect } from "react";
 
 const Signup = () => {
   const lottie = (
@@ -24,7 +30,7 @@ const Signup = () => {
       style={{ height: "100%", width: "100%" }}
     />
   );
-  const [screen, setScreen] = useState("step1");
+  const [screen, setScreen] = useState("step5");
   // Step 1
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +49,7 @@ const Signup = () => {
   const [endDateSchool, setEndDateSchool] = useState("");
   const [gpa, setGpa] = useState("");
   const [certifications, setCertifications] = useState("");
-  const [onlineCourses, setDis_OfOnlineCourses] = useState("");
+  const [discription, setDiscription] = useState("");
 
   // Step 5 - Work Experience
   const [jobTitle, setJobTitle] = useState("");
@@ -64,7 +70,9 @@ const Signup = () => {
   const handleCity = (city) => {
     setCity(city);
   };
-
+  const isValidateStep1 = useMemo(() =>
+    isValidStep1(email, password, confirmPassword)
+  );
   const handleSubmit = async () => {
     if (email !== "" && password !== "") {
       const result = await fetch("http://localhost:5500/add", {
@@ -87,28 +95,7 @@ const Signup = () => {
       toast.error("Email and Passowrd are  ");
     }
   };
-  const isValidate = useMemo(() => {
-    if (
-      email.match(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        ) &&
-        password.length >= 8 &&
-        confirmPassword.length >= 8 &&
-        password === confirmPassword &&
-        password.length !=0 &&
-        confirmPassword.length != 0 
-        ) {
-          return false;
-        } else {
-          return true;
-        }
-      }, [email, password, confirmPassword]);
-      useEffect(()=>{
-        if (!isValidate) {
-          toast.success("Good To Go...")
-        }
-      } , [isValidate])
-      
+
   const step1 = useMemo(() => {
     return (
       <FormContainer
@@ -148,9 +135,9 @@ const Signup = () => {
         }
         button2={
           <FormButton
-            className={isValidate ? "--btnDisabled" : "--btn"}
+            className={isValidateStep1 ? "--btnDisabled" : "--btn"}
             text={"next"}
-            isDisabled={isValidate}
+            isDisabled={isValidateStep1}
             onClick={() => {
               setScreen("step2");
             }}
@@ -159,6 +146,12 @@ const Signup = () => {
       />
     );
   }, [password, confirmPassword, email, screen]);
+
+  // Text box validation
+  const isValidateStep2 = useMemo(
+    () => isValidStep2(firstName, lastName),
+    [firstName, lastName]
+  );
 
   const step2 = useMemo(() => {
     return (
@@ -197,8 +190,9 @@ const Signup = () => {
         }
         button2={
           <FormButton
-            className={"--btn"}
+            className={isValidateStep2 ? "--btnDisabled" : "--btn"}
             text={"next"}
+            isDisabled={isValidateStep2}
             onClick={() => {
               setScreen("step3");
             }}
@@ -206,8 +200,10 @@ const Signup = () => {
         }
       />
     );
-  }, [lastName, firstName, screen]);
+  }, [lastName, firstName]);
 
+  const isValidateStep3 = useMemo(() => isValidStep3(state, city, personalAddress, pinCode), [state, city, screen, personalAddress, pinCode]);
+  
   const step3 = useMemo(() => {
     return (
       <FormContainer
@@ -255,7 +251,6 @@ const Signup = () => {
         }
         textbox4={
           <InputText
-            key={Math.random()}
             id={"Pincode"}
             onChange={(e) => setPinCode(e)}
             inputType={"text"}
@@ -273,7 +268,8 @@ const Signup = () => {
         }
         button2={
           <FormButton
-            className={"--btn"}
+            className={!isValidateStep3 ? "--btnDisabled" : "--btn"}
+            isDisabled={!isValidateStep3}
             text={"next"}
             onClick={() => {
               setScreen("step4");
@@ -282,8 +278,10 @@ const Signup = () => {
         }
       />
     );
-  }, [state, city, screen]);
-
+  }, [state, city, screen, personalAddress, pinCode]);
+  
+  const isValidateStep4 = useMemo(() => isValidStep4(institutionName , endDateSchool , startDateSchool), [institutionName , startDateSchool ,endDateSchool]);
+  
   const step4 = useMemo(() => {
     return (
       <FormContainer
@@ -354,8 +352,7 @@ const Signup = () => {
         }
         textbox8={
           <InputText
-            id={"online_courses"}
-            onChange={(e) => setDis_OfOnlineCourses(e)}
+            onChange={(e) => setDiscription(e)}
             inputType={"text"}
             placeHolder={"Description"}
             require={false}
@@ -370,7 +367,8 @@ const Signup = () => {
         }
         button2={
           <FormButton
-            className={"--btn"}
+          className={!isValidateStep4 ? "--btnDisabled" : "--btn"}
+          isDisabled={!isValidateStep4}
             text={"Next"}
             onClick={() => {
               setScreen("step5");
@@ -379,7 +377,7 @@ const Signup = () => {
         }
       />
     );
-  }, [screen]);
+  }, [institutionName ,discription , gpa , certifications , endDateSchool  ,startDateSchool , degreeLevel  ]);
 
   const step5 = useMemo(() => {
     return (
@@ -470,7 +468,7 @@ const Signup = () => {
         }
       />
     );
-  }, []);
+  }, [responsibilities ,achievements ,jobTitle ,companyName ,endDateWork,startDateWork ]);
 
   const step6 = useMemo(() => {
     return (
@@ -537,13 +535,17 @@ const Signup = () => {
 
   return (
     <>
-      <NavbarBeforeLogin />
+      <NavbarBeforeLogin
+        leftSection={"Unlock Your World, One Login at a Time!"}
+      />
       {screen === "step1" ? step1 : ""}
       {screen === "step2" ? step2 : ""}
       {screen === "step3" ? step3 : ""}
       {screen === "step4" ? step4 : ""}
       {screen === "step5" ? step5 : ""}
       {screen === "step6" ? step6 : ""}
+
+      {/* <Footer></Footer> */}
     </>
   );
 };
