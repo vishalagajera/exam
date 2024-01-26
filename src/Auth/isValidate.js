@@ -1,5 +1,5 @@
-var minLength = 2;
-var maxLength = 5
+const joi = require('@hapi/joi');
+
 export const isValidStep1 = (email, password, confirmPassword) => {
   if (
     email.match(
@@ -29,24 +29,30 @@ export const isValidStep2 = (firstName, lastName) => {
   }
 };
 export const isValidStep3 = (state, city, personalAddress, pinCode) => {
-  if (personalAddress.length > 2 && pinCode.length === 6 && state !== '' && city !== '' ) { 
+  if (personalAddress.length > 2 && pinCode.length === 6 && state !== '' && city !== '') {
     return true;
   } else {
     return false;
   }
 };
 
-export const isValidStep4 = (institutionName    , endDateSchool  ,startDateSchool ) => {
-  if (institutionName.length > 2 &&  endDateSchool !== '' && startDateSchool !== '' ) { 
+export const isValidStep4 = (institutionName, endDateSchool, startDateSchool) => {
+  if (institutionName.length > 2 && endDateSchool !== '' && startDateSchool !== '') {
     return true;
   } else {
     return false;
   }
 };
-export const isValidStep5 = (responsibilities ,achievements ,jobTitle ,companyName ,endDateWork,startDateWork) => {
-
+export const isValidStep5 = () => {
+  // const schema = joi.string().required()
+  // let result = schema.validate(jobTitle);
+  // console.log(result);
+  //  if (result) {
+  //   return false;
+  //  } 
+  //  return true;
 };
 export const isValidStep6 = () => {
-  
+
 };
 
